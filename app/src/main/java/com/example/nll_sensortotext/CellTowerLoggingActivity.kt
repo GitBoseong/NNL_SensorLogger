@@ -71,16 +71,17 @@ class CellTowerLoggingActivity : AppCompatActivity() {
             return
         }
 
-        // 🔹 CSV 버퍼 초기화 + 헤더 작성
+// 🔹 CSV 버퍼 초기화 + 헤더 작성
         csvBuffer.clear()
         csvBuffer.append(
-            "timestamp,latitude,longitude,altitude,cell_net,is_registered," +
-                    "mcc,mnc,operator_name," +
-                    "ci,tac,pci,arfcn," +
-                    "dbm,asu,level," +
-                    "rsrp,rsrq,rssnr,cqi,timingAdvance," +
-                    "ssRsrp,ssRsrq,ssSinr," +
-                    "csiRsrp,csiRsrq,csiSinr\n"
+            "timestamp,latitude,longitude,altitude," +
+                    "RAT,isServingCell," +
+                    "MCC,MNC,OperatorName," +
+                    "CellIdentity,TrackingAreaCode,PhysicalCellId,ARFCN," +
+                    "SignalStrengthDbm,SignalStrengthAsu,SignalStrengthLevel," +
+                    "LTE_RSRP,LTE_RSRQ,LTE_RSSI,LTE_SINR,LTE_CQI,TimingAdvance," +
+                    "NR_SSB_RSRP,NR_SSB_RSRQ,NR_SSB_SINR," +
+                    "NR_CSI_RSRP,NR_CSI_RSRQ,NR_CSI_SINR\n"
         )
 
         isLogging = true
@@ -304,37 +305,50 @@ class CellTowerLoggingActivity : AppCompatActivity() {
                         }
                     }
 
-                    sb.append(
-                        listOf(
-                            now,
-                            lat,
-                            lon,
-                            alt,
-                            cellNet,
-                            isRegistered,
-                            mcc ?: "",
-                            mnc ?: "",
-                            operatorName,
-                            ci?.toString() ?: "",
-                            tac?.toString() ?: "",
-                            pci?.toString() ?: "",
-                            arfcn?.toString() ?: "",
-                            dbm?.toString() ?: "",
-                            asu?.toString() ?: "",
-                            level?.toString() ?: "",
-                            rsrp?.toString() ?: "",
-                            rsrq?.toString() ?: "",
-                            rssnr?.toString() ?: "",
-                            cqi?.toString() ?: "",
-                            timingAdvance?.toString() ?: "",
-                            ssRsrp?.toString() ?: "",
-                            ssRsrq?.toString() ?: "",
-                            ssSinr?.toString() ?: "",
-                            csiRsrp?.toString() ?: "",
-                            csiRsrq?.toString() ?: "",
-                            csiSinr?.toString() ?: ""
-                        ).joinToString(",")
-                    )
+                    // 🔹 헤더 순서에 맞게 값 채우기
+                    val line = listOf(
+                        // 1) 위치 / 기본
+                        now,                     // timestamp
+                        lat,
+                        lon,
+                        alt,
+                        cellNet,                 // RAT
+                        isRegistered,            // isServingCell (1/0)
+
+                        // 2) PLMN / 셀 식별
+                        mcc ?: "",               // MCC
+                        mnc ?: "",               // MNC
+                        operatorName,            // OperatorName
+                        ci?.toString() ?: "",    // CellIdentity
+                        tac?.toString() ?: "",   // TrackingAreaCode
+                        pci?.toString() ?: "",   // PhysicalCellId
+                        arfcn?.toString() ?: "", // ARFCN
+
+                        // 3) 공통 신호 세기
+                        dbm?.toString() ?: "",   // SignalStrengthDbm
+                        asu?.toString() ?: "",   // SignalStrengthAsu
+                        level?.toString() ?: "", // SignalStrengthLevel
+
+                        // 4) LTE 전용 (RAT == LTE일 때만 의미 있음 / 나머지는 빈칸)
+                        if (cellNet == "LTE") rsrp?.toString() ?: "" else "",   // LTE_RSRP
+                        if (cellNet == "LTE") rsrq?.toString() ?: "" else "",   // LTE_RSRQ
+                        if (cellNet == "LTE") dbm?.toString() ?: "" else "",    // LTE_RSSI (여기서는 dbm 사용)
+                        if (cellNet == "LTE") rssnr?.toString() ?: "" else "",  // LTE_SINR
+                        if (cellNet == "LTE") cqi?.toString() ?: "" else "",    // LTE_CQI
+                        if (cellNet == "LTE") timingAdvance?.toString() ?: "" else "", // TimingAdvance
+
+                        // 5) NR SSB 기반
+                        if (cellNet == "NR") ssRsrp?.toString() ?: "" else "",  // NR_SSB_RSRP
+                        if (cellNet == "NR") ssRsrq?.toString() ?: "" else "",  // NR_SSB_RSRQ
+                        if (cellNet == "NR") ssSinr?.toString() ?: "" else "",  // NR_SSB_SINR
+
+                        // 6) NR CSI 기반
+                        if (cellNet == "NR") csiRsrp?.toString() ?: "" else "", // NR_CSI_RSRP
+                        if (cellNet == "NR") csiRsrq?.toString() ?: "" else "", // NR_CSI_RSRQ
+                        if (cellNet == "NR") csiSinr?.toString() ?: "" else ""  // NR_CSI_SINR
+                    ).joinToString(",")
+
+                    sb.append(line)
                     sb.append("\n")
                 }
 
