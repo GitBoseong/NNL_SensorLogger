@@ -22,6 +22,7 @@ class MainActivity : AppCompatActivity() {
         val cardSensorRadiomap = findViewById<MaterialCardView>(R.id.cardSensorRadiomap)
         val cardArduino = findViewById<MaterialCardView>(R.id.cardArduino)
         val cardPDR = findViewById<MaterialCardView>(R.id.cardPDR)
+        val cardCellTower = findViewById<MaterialCardView>(R.id.cardCellTower)
 
         // 3) 클릭 리스너 연결
         cardWifi.setOnClickListener {
@@ -42,6 +43,10 @@ class MainActivity : AppCompatActivity() {
 
         cardPDR.setOnClickListener {
             startActivity(Intent(this, PDRActivity::class.java))
+        }
+
+        cardCellTower.setOnClickListener {
+            startActivity(Intent(this, CellTowerLoggingActivity::class.java))
         }
     }
 }

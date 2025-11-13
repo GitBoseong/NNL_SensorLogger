@@ -66,14 +66,19 @@ dependencies {
     // AppCompat (for ActionBar, 호환성)
     implementation("androidx.appcompat:appcompat:1.4.1")
 
-    // ─────────── 여기에 추가 ───────────
+    // 위치 서비스 (FusedLocationProviderClient)
+    implementation("com.google.android.gms:play-services-location:21.2.0")
+
+    implementation("org.osmdroid:osmdroid-android:6.1.13")
+
+
     // Material Components (MaterialToolbar, MaterialCardView 등)
     implementation("com.google.android.material:material:1.8.0")
     // ConstraintLayout (XML 기반 레이아웃 제약)
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     // CoordinatorLayout (앱바 + 스크롤 연동)
     implementation("androidx.coordinatorlayout:coordinatorlayout:1.2.0")
-    // ────────────────────────────────
+
 
     // Compose BOM 및 Material3
     implementation(platform("androidx.compose:compose-bom:2023.08.00"))
