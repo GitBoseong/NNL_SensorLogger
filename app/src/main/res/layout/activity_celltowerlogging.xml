@@ -10,53 +10,92 @@
         android:id="@+id/txtTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Cell Tower Logging"
-        android:textSize="20sp"
+        android:text="Cell Tower Monitor"
+        android:textSize="22sp"
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
 
-    <Button
-        android:id="@+id/btnStartLogging"
-        android:layout_width="0dp"
+    <LinearLayout
+        android:id="@+id/btnContainer"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="수집 시작"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintTop_toBottomOf="@id/txtTitle"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/btnStopLogging" />
+        android:orientation="horizontal"
+        android:layout_marginTop="12dp"
+        app:layout_constraintTop_toBottomOf="@id/txtTitle">
 
-    <Button
-        android:id="@+id/btnStopLogging"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="수집 종료"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="8dp"
-        app:layout_constraintTop_toBottomOf="@id/txtTitle"
-        app:layout_constraintStart_toEndOf="@id/btnStartLogging"
-        app:layout_constraintEnd_toEndOf="parent" />
+        <Button
+            android:id="@+id/btnStartLogging"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="수집 시작"
+            android:layout_marginEnd="4dp"/>
+
+        <Button
+            android:id="@+id/btnStopLogging"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="수집 종료"
+            android:enabled="false"
+            android:layout_marginStart="4dp"/>
+    </LinearLayout>
 
     <TextView
         android:id="@+id/txtStatus"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="상태: 대기 중"
-        android:textSize="14sp"
-        app:layout_constraintTop_toBottomOf="@id/btnStartLogging"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"/>
+        android:textColor="#D32F2F"
+        android:textStyle="italic"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/btnContainer"/>
 
-    <org.osmdroid.views.MapView
-        android:id="@+id/osmMap"
+    <TextView
+        android:id="@+id/txtServingHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="[Serving Cell Info]"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@id/txtStatus"/>
+
+    <TextView
+        android:id="@+id/txtServingCell"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#E3F2FD"
+        android:padding="12dp"
+        android:text="데이터 불러오는 중..."
+        android:textColor="#1565C0"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/txtServingHeader"/>
+
+    <TextView
+        android:id="@+id/txtNeighborHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="[Neighbor Cells List]"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@id/txtServingCell"/>
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:background="#FAFAFA"
+        app:layout_constraintTop_toBottomOf="@id/txtNeighborHeader"
+        app:layout_constraintBottom_toBottomOf="parent">
 
-        app:layout_constraintTop_toBottomOf="@id/txtStatus"
-        app:layout_constraintBottom_toBottomOf="parent"
-
-        android:layout_marginTop="16dp"/>
+        <TextView
+            android:id="@+id/txtNeighborCells"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="12dp"
+            android:text="이웃 셀 검색 중..."
+            android:textSize="14sp" />
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
