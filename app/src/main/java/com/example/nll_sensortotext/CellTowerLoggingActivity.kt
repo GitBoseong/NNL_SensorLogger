@@ -213,7 +213,12 @@ class CellTowerLoggingActivity : AppCompatActivity() {
                     pci = id.pci.toString(); arfcn = id.earfcn.toString(); dbm = sig.dbm.toString()
                     asu = sig.asuLevel.toString(); level = sig.level.toString()
                     rsrp = sig.rsrp.toString(); rsrq = sig.rsrq.toString(); rssi = sig.dbm.toString()
-                    sinr = sig.rssnr.toString(); cqi = sig.cqi.toString(); ta = sig.timingAdvance.toString()
+                    // sinr = sig.rssnr.toString(); cqi = sig.cqi.toString(); ta = sig.timingAdvance.toString()
+
+                    // test, 미지원 표시 명시
+                    val rawTa = sig.timingAdvance
+                    sinr = sig.rssnr.toString(); cqi = sig.cqi.toString(); ta = if (rawTa == 0 || rawTa == Integer.MAX_VALUE) "N/A" else rawTa.toString()
+
                 }
                 is CellInfoNr -> {
                     cellNet = "NR"; val id = cellInfo.cellIdentity as? CellIdentityNr; val sig = cellInfo.cellSignalStrength as? CellSignalStrengthNr

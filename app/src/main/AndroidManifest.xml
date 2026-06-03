@@ -85,6 +85,10 @@
             android:exported="true"
             android:label="@string/app_name" />
 
+        <activity
+            android:name=".PDRWithBLE_WiFi"
+            android:exported="false" />
+
 
     </application>
 </manifest>

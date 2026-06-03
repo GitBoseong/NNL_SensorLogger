@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rootScrollView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="#FFFFFF">
+
+    <LinearLayout
+        android:id="@+id/rootLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <!-- 제목 -->
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="PDR + RF Data Logger"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#222222"
+            android:gravity="center"
+            android:paddingTop="12dp"
+            android:paddingBottom="20dp" />
+
+        <!-- 상태 표시 -->
+        <TextView
+            android:id="@+id/tvStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="상태: 대기 중"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#333333"
+            android:gravity="center"
+            android:padding="14dp"
+            android:background="#F2F2F2" />
+
+        <!-- 간격 -->
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
+
+        <!-- 수집 설정 제목 -->
+        <TextView
+            android:id="@+id/tvSettingTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="수집 기능 설정"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#222222"
+            android:paddingBottom="8dp" />
+
+        <!-- BLE 스캔 토글 -->
+        <LinearLayout
+            android:id="@+id/layoutBleScan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:background="#FAFAFA">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvBleTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="BLE 수집"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="#222222" />
+
+                <TextView
+                    android:id="@+id/tvBleDesc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="BLE 스캔 결과를 MAC/SSID 열로 저장"
+                    android:textSize="13sp"
+                    android:textColor="#777777"
+                    android:paddingTop="3dp" />
+            </LinearLayout>
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/swBleScan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false" />
+
+        </LinearLayout>
+
+        <!-- 구분선 -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#E0E0E0" />
+
+        <!-- Wi-Fi 스캔 토글 -->
+        <LinearLayout
+            android:id="@+id/layoutWifiScan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:background="#FAFAFA">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvWifiTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Wi-Fi 수집"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="#222222" />
+
+                <TextView
+                    android:id="@+id/tvWifiDesc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Wi-Fi 스캔 결과를 BSSID/SSID 열로 저장"
+                    android:textSize="13sp"
+                    android:textColor="#777777"
+                    android:paddingTop="3dp" />
+            </LinearLayout>
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/swWifiScan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false" />
+
+        </LinearLayout>
+
+        <!-- 구분선 -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#E0E0E0" />
+
+        <!-- TJ BLE 필터 토글 -->
+        <LinearLayout
+            android:id="@+id/layoutBleTjOnly"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:background="#FAFAFA">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvBleTjTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="TJ BLE만 수집"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="#222222" />
+
+                <TextView
+                    android:id="@+id/tvBleTjDesc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="BLE 이름이 TJ로 시작하는 장치만 저장"
+                    android:textSize="13sp"
+                    android:textColor="#777777"
+                    android:paddingTop="3dp" />
+            </LinearLayout>
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/swBleTjOnly"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false" />
+
+        </LinearLayout>
+
+        <!-- 간격 -->
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="28dp" />
+
+        <!-- 센서 정보 표시 영역 -->
+        <TextView
+            android:id="@+id/tvSensorInfoTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="수집 센서"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#222222"
+            android:paddingBottom="8dp" />
+
+        <TextView
+            android:id="@+id/tvSensorInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="• Accelerometer 50Hz\n• Gyroscope 50Hz\n• Magnetometer 50Hz\n• GameRotationVector 50Hz\n• BLE RSSI 선택 수집\n• Wi-Fi RSSI 선택 수집"
+            android:textSize="15sp"
+            android:textColor="#444444"
+            android:lineSpacingExtra="4dp"
+            android:padding="14dp"
+            android:background="#F7F7F7" />
+
+        <!-- 간격 -->
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="32dp" />
+
+        <!-- 버튼 영역 -->
+        <LinearLayout
+            android:id="@+id/layoutButtons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/btnStart"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_weight="1"
+                android:text="수집 시작"
+                android:textSize="17sp"
+                android:textStyle="bold" />
+
+            <Space
+                android:layout_width="14dp"
+                android:layout_height="match_parent" />
+
+            <Button
+                android:id="@+id/btnStop"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_weight="1"
+                android:text="수집 종료"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:enabled="false" />
+
+        </LinearLayout>
+
+        <!-- 간격 -->
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="24dp" />
+
+        <!-- 저장 설명 -->
+        <TextView
+            android:id="@+id/tvSaveInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="수집 종료 시 Downloads 폴더에 날짜_시간_PDR_RF.csv 형식으로 저장됩니다."
+            android:textSize="13sp"
+            android:textColor="#777777"
+            android:gravity="center"
+            android:paddingBottom="20dp" />
+
+    </LinearLayout>
+
+</ScrollView>

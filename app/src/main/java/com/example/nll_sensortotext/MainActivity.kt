@@ -17,6 +17,8 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         // 2) MaterialCardView 참조
+        val cardPdrRfLogger = findViewById<MaterialCardView>(R.id.cardPdrRfLogger)
+
         val cardWifi = findViewById<MaterialCardView>(R.id.cardWifi)
         val cardSensorData = findViewById<MaterialCardView>(R.id.cardSensorData)
         val cardSensorRadiomap = findViewById<MaterialCardView>(R.id.cardSensorRadiomap)
@@ -25,6 +27,12 @@ class MainActivity : AppCompatActivity() {
         val cardCellTower = findViewById<MaterialCardView>(R.id.cardCellTower)
 
         // 3) 클릭 리스너 연결
+
+        // 새로 추가한 PDR + RF 통합 수집 화면
+        cardPdrRfLogger.setOnClickListener {
+            startActivity(Intent(this, PDRWithBLE_WiFi::class.java))
+        }
+
         cardWifi.setOnClickListener {
             startActivity(Intent(this, Make_RadioMap::class.java))
         }
